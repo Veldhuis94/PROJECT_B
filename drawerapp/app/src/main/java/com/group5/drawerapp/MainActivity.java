@@ -1,5 +1,6 @@
 package com.group5.drawerapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Random rand = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +74,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            ImageView star = findViewById(R.id.star);
+            star.setVisibility(View.VISIBLE);
         }
 
         return super.onOptionsItemSelected(item);
@@ -80,18 +87,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        if (id == R.id.nav_share) {
+            int k = rand.nextInt(800);
+            Intent myIntent = new Intent(Intent.ACTION_SEND);
+            myIntent.setType("text/plain");
+            String shareBody = "Y'all finna share" + k;
+            String shareSub = "Shared from self-made android app, y'all proud of me?";
+            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+            startActivity(Intent.createChooser(myIntent, "Share using what?" + k));
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            TextView textclick = findViewById(R.id.clicktext);
+            textclick.setVisibility(View.VISIBLE);
+        } else if (id == R.id.nav_slideshow) {
+            TextView textclick = findViewById(R.id.clicktext);
+            textclick.setVisibility(View.INVISIBLE);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
