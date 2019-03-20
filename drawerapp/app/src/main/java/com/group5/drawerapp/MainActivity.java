@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             TextView textclick = findViewById(R.id.clicktext);
             textclick.setVisibility(View.INVISIBLE);
+        } else if (id == R.id.nav_send) {
+            startActivity(new Intent(MainActivity.this, activitytwo.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
